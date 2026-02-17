@@ -2,22 +2,18 @@
 
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
-import { headers } from 'next/headers'
 
 export async function login() {
     const supabase = await createClient()
 
-    const origin = (await headers()).get('origin')
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+
+    const { data } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-            redirectTo: `${origin}/auth/callback`,
+            redirectTo: `${siteUrl}/auth/callback`,
         },
     })
-
-    // Note: VERCEL_URL is automatically set by Vercel. 
-    // For local development, we default to localhost:3000.
-    // Proper URL handling logic might need to be more robust for production if custom domains are used.
 
     if (data.url) {
         redirect(data.url)
