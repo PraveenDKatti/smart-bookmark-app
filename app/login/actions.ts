@@ -1,3 +1,5 @@
+'use server'
+
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import { getURL } from '@/utils/get-url'
