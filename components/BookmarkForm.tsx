@@ -44,6 +44,7 @@ export default function BookmarkForm() {
 
             setTitle('')
             setUrl('')
+            router.refresh()
         } catch (err: any) {
             setError(err.message || 'Failed to add bookmark')
         } finally {
