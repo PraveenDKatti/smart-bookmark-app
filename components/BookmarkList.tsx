@@ -24,7 +24,7 @@ export default function BookmarkList({ initialBookmarks }: { initialBookmarks: B
 
     useEffect(() => {
         const channel = supabase
-            .channel('realtime bookmarks')
+            .channel(`realtime bookmarks - ${Math.random()}`)
             .on(
                 'postgres_changes',
                 {
