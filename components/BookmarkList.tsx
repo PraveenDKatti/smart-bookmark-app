@@ -33,6 +33,7 @@ export default function BookmarkList({ initialBookmarks }: { initialBookmarks: B
                     table: 'bookmarks',
                 },
                 (payload) => {
+                    console.log('Realtime Event received:', payload)
                     if (payload.eventType === 'INSERT') {
                         setBookmarks((prev) => [payload.new as Bookmark, ...prev])
                     } else if (payload.eventType === 'DELETE') {
@@ -44,11 +45,12 @@ export default function BookmarkList({ initialBookmarks }: { initialBookmarks: B
                             )
                         )
                     }
-                    router.refresh() // Optional: Fetch fresh data from server to be sure
+                    router.refresh()
                 }
             )
-            .subscribe((status) => {
+            .subscribe((status, err) => {
                 console.log('Realtime Status:', status)
+                if (err) console.error('Realtime Error:', err)
             })
 
         return () => {
