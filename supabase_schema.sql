@@ -27,3 +27,6 @@ create policy "Users can delete their own bookmarks"
 
 -- Realtime Setup: Enable replication for the bookmarks table
 alter publication supabase_realtime add table bookmarks;
+
+-- This ensures events (delete) contain full row data, including user_id,
+alter table bookmarks replica identity full;
