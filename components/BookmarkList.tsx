@@ -31,6 +31,7 @@ export default function BookmarkList({ initialBookmarks }: { initialBookmarks: B
                     event: '*',
                     schema: 'public',
                     table: 'bookmarks',
+                    filter: `user_id=eq.${initialBookmarks[0]?.user_id ?? ''}`
                 },
                 (payload) => {
                     console.log('Realtime Event received:', payload)
