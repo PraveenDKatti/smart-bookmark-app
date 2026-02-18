@@ -47,7 +47,9 @@ export default function BookmarkList({ initialBookmarks }: { initialBookmarks: B
                     router.refresh() // Optional: Fetch fresh data from server to be sure
                 }
             )
-            .subscribe()
+            .subscribe((status) => {
+                console.log('Realtime Status:', status)
+            })
 
         return () => {
             supabase.removeChannel(channel)
